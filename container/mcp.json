@@ -1,0 +1,9 @@
+{
+	"mcpServers": {
+		"orb": {
+			"command": "node",
+			"args": ["/opt/orb/approve-mcp.mjs"],
+			"env": { "ORB_CONTROL_URL": "http://orb.internal" }
+		}
+	}
+}

@@ -1,0 +1,10 @@
+# Copy to .dev.vars for local development. Never commit .dev.vars.
+#
+# AI Gateway token with the "Run" permission (authenticated gateway).
+AI_GATEWAY_TOKEN=
+# GitHub token: contents (read/write) + pull requests (read/write) on the repos you point orbs at.
+GITHUB_TOKEN=
+# Random 32+ byte secret used to sign short-lived WebSocket tickets: `openssl rand -hex 32`
+SESSION_SECRET=
+# The token you paste into the web UI (or send as `Authorization: Bearer`). Unused with Cloudflare Access.
+AUTH_TOKEN=

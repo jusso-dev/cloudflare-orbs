@@ -1,0 +1,19 @@
+{
+	"name": "cloudflare-orbs",
+	"private": true,
+	"type": "module",
+	"packageManager": "pnpm@10.11.0",
+	"engines": {
+		"node": ">=22.18"
+	},
+	"scripts": {
+		"dev": "pnpm --filter @orbs/app dev",
+		"build": "pnpm --filter @orbs/app build",
+		"deploy": "pnpm --filter @orbs/app deploy",
+		"typecheck": "pnpm -r typecheck",
+		"test": "pnpm -r test"
+	},
+	"devDependencies": {
+		"typescript": "^7.0.2"
+	}
+}

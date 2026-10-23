@@ -1,0 +1,10 @@
+{
+	"name": "Orbs",
+	"short_name": "Orbs",
+	"description": "Remote coding agents that sleep for free and wake on demand.",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#0d1122",
+	"theme_color": "#0d1122",
+	"icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

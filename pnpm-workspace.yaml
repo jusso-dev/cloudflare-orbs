@@ -1,0 +1,15 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# Build scripts needed by cf / the Cloudflare Vite plugin.
+allowBuilds:
+  esbuild: true
+  workerd: true
+  sharp: true
+
+# pnpm 10 spelling of the same allowlist.
+onlyBuiltDependencies:
+  - esbuild
+  - workerd
+  - sharp

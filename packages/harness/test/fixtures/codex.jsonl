@@ -1,0 +1,9 @@
+{"type": "thread.started", "thread_id": "01a16a9c-cb9c-74d3-8c1b-f2612c90a58f"}
+{"type": "turn.started"}
+{"type": "item.completed", "item": {"id": "item_0", "type": "agent_message", "text": "Will create file, check contents.\n"}}
+{"type": "item.started", "item": {"id": "item_1", "type": "command_execution", "command": "/bin/bash -lc 'cat NOTES.md'", "aggregated_output": "(trimmed)", "exit_code": null, "status": "in_progress"}}
+{"type": "item.completed", "item": {"id": "item_1", "type": "command_execution", "command": "/bin/bash -lc 'cat NOTES.md'", "aggregated_output": "(trimmed)", "exit_code": 0, "status": "completed"}}
+{"type": "item.started", "item": {"id": "item_2", "type": "command_execution", "command": "/bin/zsh -lc 'printf hi > hello.txt\ncat hello.txt'", "aggregated_output": "", "exit_code": null, "status": "in_progress"}}
+{"type": "item.completed", "item": {"id": "item_2", "type": "command_execution", "command": "/bin/zsh -lc 'printf hi > hello.txt\ncat hello.txt'", "aggregated_output": "hi", "exit_code": 0, "status": "completed"}}
+{"type": "item.completed", "item": {"id": "item_3", "type": "agent_message", "text": "done"}}
+{"type": "turn.completed", "usage": {"input_tokens": 45779, "cached_input_tokens": 22016, "cache_write_input_tokens": 0, "output_tokens": 103, "reasoning_output_tokens": 0}}

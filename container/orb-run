@@ -1,0 +1,39 @@
+#!/bin/sh
+# orb-run <task-dir> -- <command> [args...]
+#
+# Runs <command> detached in its own session, so it survives the request that
+# started it and can be signalled as a process group:
+#   stdin   <- <task-dir>/prompt.txt
+#   stdout  -> <task-dir>/events.jsonl   (the agent's JSON event stream)
+#   stderr  -> <task-dir>/stderr.log
+# When the command exits it appends an {"type":"__orb_exit"} sentinel line to the
+# event stream and writes <task-dir>/exit-code. The pid file records the boot id
+# so a restored snapshot never mistakes a stale pid for a live task.
+#
+# Returns as soon as the pid file exists. Exit 0 = started.
+set -eu
+
+dir=$1
+shift
+[ "${1:-}" = "--" ] && shift
+
+mkdir -p "$dir"
+: > "$dir/events.jsonl"
+: > "$dir/stderr.log"
+rm -f "$dir/pid" "$dir/exit-code"
+
+setsid sh -c '
+	dir=$1; shift
+	echo "$$ $(cat /proc/sys/kernel/random/boot_id)" > "$dir/pid.tmp" && mv "$dir/pid.tmp" "$dir/pid"
+	"$@" < "$dir/prompt.txt" >> "$dir/events.jsonl" 2>> "$dir/stderr.log"
+	code=$?
+	printf "\n{\"type\":\"__orb_exit\",\"code\":%d}\n" "$code" >> "$dir/events.jsonl"
+	echo "$code" > "$dir/exit-code.tmp" && mv "$dir/exit-code.tmp" "$dir/exit-code"
+' orb-task "$dir" "$@" </dev/null >/dev/null 2>&1 &
+
+i=0
+while [ ! -s "$dir/pid" ] && [ "$i" -lt 100 ]; do
+	sleep 0.1
+	i=$((i + 1))
+done
+[ -s "$dir/pid" ]
